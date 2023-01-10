@@ -1,0 +1,26 @@
+class Solution {
+    static List<List<Integer>>list=new ArrayList<>();
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+           list = new ArrayList<>();
+            List<Integer> l=new ArrayList<>();
+            Arrays.sort(nums);	// phle hi sort krlo agr .. descending order me hoga toh
+	        printNonDulecateSubsets(nums,"",0,l);
+		
+		   return list;
+     }
+
+	public static void printNonDulecateSubsets(int[] nums, String ans, int idx,List<Integer>l) {
+		
+			list.add(new ArrayList<>(l));
+
+		for (int j = idx; j < nums.length; j++) {
+			if(idx!=j && nums[j]==nums[j-1]) {
+				continue;
+			}
+			l.add(nums[j]);
+			// recursive call
+			printNonDulecateSubsets(nums,ans+nums[j],j+1, l);
+			l.remove(l.size()-1);
+	    }
+    }
+}
