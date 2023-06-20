@@ -1,1 +1,36 @@
-using PriorityQueue And we need Max_Heap
+###  using PriorityQueue And we need Max_Heap
+
+
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        /*
+           creating a priority queue it'll containg integer by default in java PriorityQueue implemented a min             heap but we need max heap
+        */
+        PriorityQueue<Integer>pq=new PriorityQueue<Integer>
+        (
+            new Comparator<Integer>() // creating a max heap
+            {
+            // override the compare method using comparator by returning haviest stones the first then the lowest stones
+                public int compare(Integer a, Integer b){
+                    return b-a;
+
+                 }
+            }
+        );
+        for(int i=0;i<stones.length;i++){
+            pq.add(stones[i]);
+        }
+        while(pq.size()>1){
+            int stones1=pq.poll();
+            int stones2=pq.poll();
+
+            if(stones1>stones2){
+                pq.add(stones1-stones2);
+            }
+        }
+        if(pq.isEmpty()){
+            return 0;
+        }
+        return pq.poll();
+    }
+}
